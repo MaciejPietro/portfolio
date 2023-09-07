@@ -1,4 +1,3 @@
-import { getServerSideSitemap } from "next-sitemap";
 import ContentfulApi from "@utils/ContentfulApi";
 import { Config } from "@utils/Config";
 
@@ -30,7 +29,7 @@ export const getServerSideProps = async (ctx) => {
   }
 
   const fields = blogPostFields.concat(blogIndexPageFields);
-  return getServerSideSitemap(ctx, fields);
+  return {ctx, fields}
 };
 
 // Default export to prevent next.js errors
