@@ -1,24 +1,19 @@
 import GlobalStyles from "./main.styles.js";
-import Providers from './providers'
+import Providers from "./providers";
 import Layout from "@components/Layout";
-
+import CursorAnimation from "@components/Animations/CursorAnimation";
 
 export default function MainLayout(props) {
   const { preview } = props;
   return (
     <Providers>
-      <div className="w-full flex h-full bg-black">
       <Layout>{props.children}</Layout>
-      </div>
+      <CursorAnimation />
     </Providers>
   );
 }
 
-
-
-
 // import { Layout } from '@components/Layout'
-
 
 // export const metadata = {
 //   title: {

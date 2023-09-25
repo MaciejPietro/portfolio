@@ -51,9 +51,40 @@ export default class ContentfulApi {
           heroBanner {
             headline
             subHeading
-            internalLink
-            externalLink
-            ctaText
+            body {
+              json
+              links {
+                entries {
+                  block {
+                    sys {
+                      id
+                    }
+                    __typename
+                    ... on VideoEmbed {
+                      title
+                      embedUrl
+                    }
+                    ... on CodeBlock {
+                      description
+                      language
+                      code
+                    }
+                  }
+                }
+                assets {
+                  block {
+                    sys {
+                      id
+                    }
+                    url
+                    title
+                    width
+                    height
+                    description
+                  }
+                }
+              }
+            }
             image {
               url
               title
@@ -103,14 +134,36 @@ export default class ContentfulApi {
       }
     }`;
 
+    
     const response = await this.callContentful(query, variables, options);
 
-    const pageContent = response.data.pageContentCollection.items
+    const pageContent = response.data?.pageContentCollection.items
       ? response.data.pageContentCollection.items
       : [];
 
     return pageContent.pop();
   }
+
+  static async getGeneralContent() {
+    const query = `
+    query GetPageContent {
+      generalCollection {
+        items {
+          githubLink
+          linkedinLink
+        }
+      }
+    }`;
+
+    
+    const response = await this.callContentful(query);
+
+    console.log('xop', response.data?.generalCollection.items)
+
+
+    return response.data?.generalCollection.items[0];
+  }
+
 
   /**
    * Fetch a batch of blog post slugs (by given page number).
