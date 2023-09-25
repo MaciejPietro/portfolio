@@ -165,6 +165,28 @@ export default class ContentfulApi {
   }
 
 
+  static async getPagesSlugs() {
+    const query = `query GetPagesSlugs {
+      pageContentCollection {
+        total
+        items {
+          slug
+        }
+      }
+    }`;
+
+    const response = await this.callContentful(query);
+
+    const { total } = response.data.pageContentCollection;
+    const slugs = response.data.pageContentCollection.items
+      ? response.data.pageContentCollection.items.map((item) => item.slug)
+      : [];
+
+    return { slugs, total };
+  }
+
+
+
   /**
    * Fetch a batch of blog post slugs (by given page number).
    *
@@ -179,31 +201,31 @@ export default class ContentfulApi {
    * param: page (number)
    *
    */
-  // static async getPaginatedSlugs(page) {
-  //   const queryLimit = 100;
-  //   const skipMultiplier = page === 1 ? 0 : page - 1;
-  //   const skip = skipMultiplier > 0 ? queryLimit * skipMultiplier : 0;
+  static async getPaginatedSlugs(page) {
+    const queryLimit = 100;
+    const skipMultiplier = page === 1 ? 0 : page - 1;
+    const skip = skipMultiplier > 0 ? queryLimit * skipMultiplier : 0;
 
-  //   const variables = { limit: queryLimit, skip };
+    const variables = { limit: queryLimit, skip };
 
-  //   const query = `query GetPaginatedSlugs($limit: Int!, $skip: Int!) {
-  //       blogPostCollection(limit: $limit, skip: $skip, order: date_DESC) {
-  //         total
-  //         items {
-  //           slug
-  //           }
-  //         }
-  //       }`;
+    const query = `query GetPaginatedSlugs($limit: Int!, $skip: Int!) {
+        blogPostCollection(limit: $limit, skip: $skip, order: date_DESC) {
+          total
+          items {
+            slug
+            }
+          }
+        }`;
 
-  //   const response = await this.callContentful(query, variables);
+    const response = await this.callContentful(query, variables);
 
-  //   const { total } = response.data.blogPostCollection;
-  //   const slugs = response.data.blogPostCollection.items
-  //     ? response.data.blogPostCollection.items.map((item) => item.slug)
-  //     : [];
+    const { total } = response.data.blogPostCollection;
+    const slugs = response.data.blogPostCollection.items
+      ? response.data.blogPostCollection.items.map((item) => item.slug)
+      : [];
 
-  //   return { slugs, total };
-  // }
+    return { slugs, total };
+  }
 
   /**
    * Fetch all blog post slugs.
@@ -219,24 +241,44 @@ export default class ContentfulApi {
    * https://www.contentful.com/developers/videos/learn-graphql/#graphql-fragments-and-query-complexity
    *
    */
-  // static async getAllPostSlugs() {
-  //   let page = 1;
-  //   let shouldQueryMoreSlugs = true;
-  //   const returnSlugs = [];
+  static async getAllPostSlugs() {
+    let page = 1;
+    let shouldQueryMoreSlugs = true;
+    const returnSlugs = [];
 
-  //   while (shouldQueryMoreSlugs) {
-  //     const response = await this.getPaginatedSlugs(page);
+    while (shouldQueryMoreSlugs) {
+      const response = await this.getPaginatedSlugs(page);
 
-  //     if (response.slugs.length > 0) {
-  //       returnSlugs.push(...response.slugs);
-  //     }
+      if (response.slugs.length > 0) {
+        returnSlugs.push(...response.slugs);
+      }
 
-  //     shouldQueryMoreSlugs = returnSlugs.length < response.total;
-  //     page++;
-  //   }
+      shouldQueryMoreSlugs = returnSlugs.length < response.total;
+      page++;
+    }
 
-  //   return returnSlugs;
-  // }
+    return returnSlugs;
+  }
+
+
+  static async getAllPageSlugs() {
+    let page = 1;
+    let shouldQueryMoreSlugs = true;
+    const returnSlugs = [];
+
+    while (shouldQueryMoreSlugs) {
+      const response = await this.getPaginatedSlugs(page);
+
+      if (response.slugs.length > 0) {
+        returnSlugs.push(...response.slugs);
+      }
+
+      shouldQueryMoreSlugs = returnSlugs.length < response.total;
+      page++;
+    }
+
+    return returnSlugs;
+  }
 
   /**
    * Fetch a batch of blog posts (by given page number).
@@ -377,32 +419,34 @@ export default class ContentfulApi {
     return returnPosts;
   }
 
-  /**
-   * Fetch a single blog post by slug.
-   *
-   * This method is used on pages/blog/[slug] to fetch the data for
-   * individual blog posts at build time, which are prerendered as
-   * static HTML.
-   *
-   * The content type uses the powerful Rich Text field type for the
-   * body of the post.
-   *
-   * This query fetches linked assets (i.e. images) and entries
-   * (i.e. video embed and code block entries) that are embedded
-   * in the Rich Text field. This is rendered to the page using
-   * @components/RichTextPageContent.
-   *
-   * For more information on Rich Text fields in Contentful, view the
-   * documentation here: https://www.contentful.com/developers/docs/concepts/rich-text/
-   *
-   * Linked assets and entries are parsed and rendered using the npm package
-   * @contentful/rich-text-react-renderer
-   *
-   * https://www.npmjs.com/package/@contentful/rich-text-react-renderer
-   *
-   * param: slug (string)
-   *
-   */
+  static async getPageBySlug(slug, options = defaultOptions) {
+    const variables = { slug, preview: options.preview };
+    const query = `query GetPageBySlug($slug: String!, $preview: Boolean!) {
+      pageContentCollection(limit: 1, where: { slug: $slug }, preview: $preview) {
+        items {
+          title
+          description
+          blocksCollection {
+            items {
+              __typename
+              ... on BlockAbout {
+                title
+              }
+            }
+          }
+        }
+      }
+    }       
+    `;
+
+    const response = await this.callContentful(query, variables, options);
+    const page = response.data.pageContentCollection.items
+      ? response.data.pageContentCollection.items
+      : [];
+
+    return page;
+  }
+
   static async getPostBySlug(slug, options = defaultOptions) {
     const variables = { slug, preview: options.preview };
     const query = `query GetPostBySlug($slug: String!, $preview: Boolean!) {

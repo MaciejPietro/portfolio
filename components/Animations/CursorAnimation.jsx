@@ -10,8 +10,10 @@ export default function CursorAnimation() {
     const updatePosition = () => {
       pos.x += (mouse.x - pos.x) * speed;
       pos.y += (mouse.y - pos.y) * speed;
-      cursor.current.style.transform =
-        "translate3d(" + pos.x + "px ," + pos.y + "px, 0)";
+      if (cursor.current) {
+        cursor.current.style.transform =
+          "translate3d(" + pos.x + "px ," + pos.y + "px, 0)";
+      }
     };
 
     const updateCoordinates = (e) => {

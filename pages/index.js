@@ -171,7 +171,6 @@ export default function Home(props) {
 
 
   return (
-    <>
       <MainLayout preview={preview}>
         <PageMeta
           title={pageContent.title}
@@ -196,7 +195,6 @@ export default function Home(props) {
           </div>
         </Container>
       </MainLayout>
-    </>
   );
 }
 
