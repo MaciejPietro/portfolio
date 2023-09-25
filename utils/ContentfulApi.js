@@ -179,31 +179,31 @@ export default class ContentfulApi {
    * param: page (number)
    *
    */
-  static async getPaginatedSlugs(page) {
-    const queryLimit = 100;
-    const skipMultiplier = page === 1 ? 0 : page - 1;
-    const skip = skipMultiplier > 0 ? queryLimit * skipMultiplier : 0;
+  // static async getPaginatedSlugs(page) {
+  //   const queryLimit = 100;
+  //   const skipMultiplier = page === 1 ? 0 : page - 1;
+  //   const skip = skipMultiplier > 0 ? queryLimit * skipMultiplier : 0;
 
-    const variables = { limit: queryLimit, skip };
+  //   const variables = { limit: queryLimit, skip };
 
-    const query = `query GetPaginatedSlugs($limit: Int!, $skip: Int!) {
-        blogPostCollection(limit: $limit, skip: $skip, order: date_DESC) {
-          total
-          items {
-            slug
-            }
-          }
-        }`;
+  //   const query = `query GetPaginatedSlugs($limit: Int!, $skip: Int!) {
+  //       blogPostCollection(limit: $limit, skip: $skip, order: date_DESC) {
+  //         total
+  //         items {
+  //           slug
+  //           }
+  //         }
+  //       }`;
 
-    const response = await this.callContentful(query, variables);
+  //   const response = await this.callContentful(query, variables);
 
-    const { total } = response.data.blogPostCollection;
-    const slugs = response.data.blogPostCollection.items
-      ? response.data.blogPostCollection.items.map((item) => item.slug)
-      : [];
+  //   const { total } = response.data.blogPostCollection;
+  //   const slugs = response.data.blogPostCollection.items
+  //     ? response.data.blogPostCollection.items.map((item) => item.slug)
+  //     : [];
 
-    return { slugs, total };
-  }
+  //   return { slugs, total };
+  // }
 
   /**
    * Fetch all blog post slugs.
@@ -219,24 +219,24 @@ export default class ContentfulApi {
    * https://www.contentful.com/developers/videos/learn-graphql/#graphql-fragments-and-query-complexity
    *
    */
-  static async getAllPostSlugs() {
-    let page = 1;
-    let shouldQueryMoreSlugs = true;
-    const returnSlugs = [];
+  // static async getAllPostSlugs() {
+  //   let page = 1;
+  //   let shouldQueryMoreSlugs = true;
+  //   const returnSlugs = [];
 
-    while (shouldQueryMoreSlugs) {
-      const response = await this.getPaginatedSlugs(page);
+  //   while (shouldQueryMoreSlugs) {
+  //     const response = await this.getPaginatedSlugs(page);
 
-      if (response.slugs.length > 0) {
-        returnSlugs.push(...response.slugs);
-      }
+  //     if (response.slugs.length > 0) {
+  //       returnSlugs.push(...response.slugs);
+  //     }
 
-      shouldQueryMoreSlugs = returnSlugs.length < response.total;
-      page++;
-    }
+  //     shouldQueryMoreSlugs = returnSlugs.length < response.total;
+  //     page++;
+  //   }
 
-    return returnSlugs;
-  }
+  //   return returnSlugs;
+  // }
 
   /**
    * Fetch a batch of blog posts (by given page number).
