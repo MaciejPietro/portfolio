@@ -24,7 +24,7 @@ const DayNight = memo(() => {
   return (
     <svg
       id="transition-scene"
-      className="transition-scene"
+      className="transition-scene pointer-events-none"
       viewBox="-40 -40 580 580"
     >
       <defs>

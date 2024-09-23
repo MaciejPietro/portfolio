@@ -1,34 +1,30 @@
-
-
 :root {
-	/* Fixed colors that don't get transition/animation */
+  /* Fixed colors that don't get transition/animation */
+  --star-color: hsl(272, 57%, 95%);
+  --t-sun-color: hsl(47, 100%, 88%);
+  --t-moon-color: hsl(274, 93%, 94%);
+  --t-moon-pattern-color: hsl(274, 58%, 89%);
 
-	--star-color: hsl(272, 57%, 95%);
-	--t-sun-color: hsl(47, 100%, 88%);
-	--t-moon-color: hsl(274, 93%, 94%);
-	--t-moon-pattern-color: hsl(274, 58%, 89%);
+  /* colorz that will change on transition */
+  --circle-bg-color: hsl(28, 97%, 70%);
+  --cactus-body-color: hsl(337, 43%, 28%);
+  --cactus-flower-color: hsl(348, 80%, 62%);
+  --mountain-color: hsl(346, 43%, 50%);
+  --sand-01-color: hsl(339, 55%, 30%);
+  --sand-02-color: hsl(335, 62%, 37%);
+  --sand-03-color: hsl(338, 53%, 38%);
+  --sand-04-color: hsl(336, 46%, 50%);
 
-	/* colorz  that will change on transition */
-	--circle-bg-color: hsl(28, 97%, 70%);
-	--cactus-body-color: hsl(337, 43%, 28%);
-	--cactus-flower-color: hsl(348, 80%, 62%);
-	--mountain-color: hsl(346, 43%, 50%);
-	--sand-01-color: hsl(339, 55%, 30%);
-	--sand-02-color: hsl(335, 62%, 37%);
-	--sand-03-color: hsl(338, 53%, 38%);
-	--sand-04-color: hsl(336, 46%, 50%);
-
-	/* animation and transition timings */
-	--t-slow: 1300ms;
-	--t-med: 800ms;
-	--t-fast: 600ms;
-	--t-delay-motionpath: 600ms;
-	--t-delay-colorfades: 100ms;
-
+  /* animation and transition timings */
+  --t-slow: 1300ms;
+  --t-med: 800ms;
+  --t-fast: 600ms;
+  --t-delay-motionpath: 600ms;
+  --t-delay-colorfades: 100ms;
 }
 
 .svg-mask-transition {
-	clip-path: url(#clip-path);
+  clip-path: url(#clip-path);
 }
 
 /* Colors that do not transition */
@@ -36,213 +32,182 @@
 .sun-shadow-01,
 .sun-shadow-02,
 .cloud {
-	fill: var(--t-sun-color);
+  fill: var(--t-sun-color);
 }
 
 .sun-shadow-01 {
-	opacity: 0.3;
+  opacity: 0.3;
 }
 
 .sun-shadow-02 {
-	opacity: 0.2;
+  opacity: 0.2;
 }
 
 /* for both moons */
-
 .moon-center,
 .moon-shadow-01,
 .moon-shadow-02 {
-	fill: var(--t-moon-color);
+  fill: var(--t-moon-color);
 }
 
 .moon-shadow-01 {
-	opacity: 0.1;
+  opacity: 0.1;
 }
 
 .moon-shadow-02 {
-	opacity: 0.1;
+  opacity: 0.1;
 }
 
 .moon-pattern {
-	fill: var(--t-moon-pattern-color);
+  fill: var(--t-moon-pattern-color);
 }
 
 /* Colors that will transition */
-
 .circle-bg {
-	fill: var(--circle-bg-color);
+  fill: var(--circle-bg-color);
 }
 
 .cactus-body {
-	fill: var(--cactus-body-color);
+  fill: var(--cactus-body-color);
 }
 
 .cactus-flower {
-	fill: var(--cactus-flower-color);
+  fill: var(--cactus-flower-color);
 }
 
 .mountain {
-	fill: var(--mountain-color);
+  fill: var(--mountain-color);
 }
 
 .sand-01 {
-	fill: var(--sand-01-color);
+  fill: var(--sand-01-color);
 }
 
 .sand-02 {
-	fill: var(--sand-02-color);
+  fill: var(--sand-02-color);
 }
 
 .sand-03 {
-	fill: var(--sand-03-color);
+  fill: var(--sand-03-color);
 }
 
 .sand-04 {
-	fill: var(--sand-04-color);
+  fill: var(--sand-04-color);
 }
 
 .moonlight {
-	opacity: 0;
-}
-.rings {
-	.shadow-01,
-	.shadow-02 {
-		opacity: 0.08;
-	}
+  opacity: 0;
 }
 
-/* all the fill transitions */
+/* Unnested .rings shadows */
+.rings .shadow-01,
+.rings .shadow-02 {
+  opacity: 0.08;
+}
 
+/* All the fill transitions */
 .circle-bg,
 .color-fade-transition {
-	transition: fill var(--t-slow) linear var(--t-delay-colorfades);
+  transition: fill var(--t-slow) linear var(--t-delay-colorfades);
 }
 
-/* stars transition */
+/* Stars transition */
 .star {
-	fill: var(--star-color);
-	opacity: 0;
-	transition: opacity var(--t-fast) linear var(--t-delay-colorfades);
+  fill: var(--star-color);
+  opacity: 0;
+  transition: opacity var(--t-fast) linear var(--t-delay-colorfades);
 }
 
-/* Here we go, transition the scene colors on :hover, using the CSS vars to reset the colors for every one that gets a transition */
-
+/* Day-night transition scene */
 .day-night-transition--dark .transition-scene {
-	--circle-bg-color: hsl(253, 36%, 51%);
-	--cactus-body-color: hsl(282, 43%, 26%);
-	--cactus-flower-color: hsl(278, 40%, 62%);
-	--mountain-color: hsl(302, 36%, 37%);
-	--sand-01-color: hsl(285, 43%, 28%);
-	--sand-02-color: hsl(285, 45%, 34%);
-	--sand-03-color: hsl(285, 47%, 35%);
-	--sand-04-color: hsl(283, 43%, 42%);
-	
-	
-	.color-fade-transition {
-		transition: fill var(--t-fast) linear var(--t-delay-colorfades);
-	}
+  --circle-bg-color: hsl(253, 36%, 51%);
+  --cactus-body-color: hsl(282, 43%, 26%);
+  --cactus-flower-color: hsl(278, 40%, 62%);
+  --mountain-color: hsl(302, 36%, 37%);
+  --sand-01-color: hsl(285, 43%, 28%);
+  --sand-02-color: hsl(285, 45%, 34%);
+  --sand-03-color: hsl(285, 47%, 35%);
+  --sand-04-color: hsl(283, 43%, 42%);
 }
 
-/* Motion transitions for people who did not set reduced motion to reduce  */
+.day-night-transition--dark .transition-scene .color-fade-transition {
+  transition: fill var(--t-fast) linear var(--t-delay-colorfades);
+}
 
+/* Motion transitions for people who did not set reduced motion to reduce */
 @media (prefers-reduced-motion: no-preference) {
-	.sun {
-		offset-path: path(
-			"M107.35,727.94A304.79,304.79,0,0,1-20,739.51a319.27,319.27,0,0,1-119.14-39.12A340.8,340.8,0,0,1-237,617.77a357.93,357.93,0,0,1-78.3-252.49,339.85,339.85,0,0,1,34-123.49,319.66,319.66,0,0,1,76.1-99.66A305.13,305.13,0,0,1-93.67,79.61,304.64,304.64,0,0,1,33.69,68a319.87,319.87,0,0,1,119.15,39.13,339.85,339.85,0,0,1,97.86,82.61A353.53,353.53,0,0,1,314,308.54a353.48,353.48,0,0,1,15,133.73A339.93,339.93,0,0,1,295,565.75a320.39,320.39,0,0,1-76.11,99.71,305.23,305.23,0,0,1-111.58,62.48m.24.77C277.76,676,370.59,487.7,315,308.25S76.25,26.08-93.91,78.84s-263,241-207.35,420.47,238.69,282.16,408.85,229.4Z"
-		);
-		offset-distance: 32%;
-		transform-origin: 208px 103px;
-		transition: offset-distance var(--t-med) cubic-bezier(0.215, 0.61, 0.355, 1)
-			/* easeOutCubic */ var(--t-delay-motionpath);
-	}
+  .sun {
+    offset-path: path(
+      "M107.35,727.94A304.79,304.79,0,0,1-20,739.51a319.27,319.27,0,0,1-119.14-39.12A340.8,340.8,0,0,1-237,617.77a357.93,357.93,0,0,1-78.3-252.49,339.85,339.85,0,0,1,34-123.49,319.66,319.66,0,0,1,76.1-99.66A305.13,305.13,0,0,1-93.67,79.61,304.64,304.64,0,0,1,33.69,68a319.87,319.87,0,0,1,119.15,39.13,339.85,339.85,0,0,1,97.86,82.61A353.53,353.53,0,0,1,314,308.54a353.48,353.48,0,0,1,15,133.73A339.93,339.93,0,0,1,295,565.75a320.39,320.39,0,0,1-76.11,99.71,305.23,305.23,0,0,1-111.58,62.48m.24.77C277.76,676,370.59,487.7,315,308.25S76.25,26.08-93.91,78.84s-263,241-207.35,420.47,238.69,282.16,408.85,229.4Z"
+    );
+    offset-distance: 32%;
+    transform-origin: 208px 103px;
+    transition: offset-distance var(--t-med) cubic-bezier(0.215, 0.61, 0.355, 1)
+      var(--t-delay-motionpath);
+  }
 
-	.cloud {
-		opacity: 0.7;
-		transition: transform var(--t-med) cubic-bezier(0.215, 0.61, 0.355, 1)
-			/* easeOutCubic */ var(--t-delay-motionpath);
-	}
+  .cloud {
+    opacity: 0.7;
+    transition: transform var(--t-med) cubic-bezier(0.215, 0.61, 0.355, 1)
+      var(--t-delay-motionpath);
+  }
 
-	.moonlight {
-		offset-path: path(
-			"M675,101.23a304.55,304.55,0,0,1,98.23,81.88A319.33,319.33,0,0,1,829.83,295a341.1,341.1,0,0,1,10.78,127.62,357.92,357.92,0,0,1-123.18,233.9A339.81,339.81,0,0,1,606.1,719.84,319.59,319.59,0,0,1,481.81,736.5,306.56,306.56,0,0,1,260.48,619.93,319.71,319.71,0,0,1,203.89,508,339.94,339.94,0,0,1,193.11,380.4,358,358,0,0,1,316.29,146.51,340.05,340.05,0,0,1,427.61,83.2,320.47,320.47,0,0,1,551.93,66.51,305.23,305.23,0,0,1,675,101.23m.38-.71C517.75,17.5,319,85,231.45,251.21s-30.74,368.3,126.89,451.32,356.39,15.54,443.94-150.7S833,183.53,675.39,100.52Z"
-		);
-		offset-distance: 23%;
-		transform-origin: 260px 430px;
-		transition: all var(--t-fast) cubic-bezier(0.55, 0.055, 0.675, 0.19)
-			/* easeInCubic */;
-	}
+  .moonlight {
+    offset-path: path(
+      "M675,101.23a304.55,304.55,0,0,1,98.23,81.88A319.33,319.33,0,0,1,829.83,295a341.1,341.1,0,0,1,10.78,127.62,357.92,357.92,0,0,1-123.18,233.9A339.81,339.81,0,0,1,606.1,719.84,319.59,319.59,0,0,1,481.81,736.5,306.56,306.56,0,0,1,260.48,619.93,319.71,319.71,0,0,1,203.89,508,339.94,339.94,0,0,1,193.11,380.4,358,358,0,0,1,316.29,146.51,340.05,340.05,0,0,1,427.61,83.2,320.47,320.47,0,0,1,551.93,66.51,305.23,305.23,0,0,1,675,101.23m.38-.71C517.75,17.5,319,85,231.45,251.21s-30.74,368.3,126.89,451.32,356.39,15.54,443.94-150.7S833,183.53,675.39,100.52Z"
+    );
+    offset-distance: 23%;
+    transform-origin: 260px 430px;
+    transition: all var(--t-fast) cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  }
 
-	.day-night-transition--dark .transition-scene {
-		.sun {
-			offset-distance: 43%;
-			transition: offset-distance var(--t-fast)
-				cubic-bezier(0.55, 0.055, 0.675, 0.19);
-		}
+  .day-night-transition--dark .transition-scene .sun {
+    offset-distance: 43%;
+    transition: offset-distance var(--t-fast)
+      cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  }
 
-		.cloud {
-			transform: translateX(250px);
-			transition: transform var(--t-fast) cubic-bezier(0.55, 0.055, 0.675, 0.19)
-		}
+  .day-night-transition--dark .transition-scene .cloud {
+    transform: translateX(250px);
+    transition: transform var(--t-fast) cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  }
 
-		.moonlight {
-			opacity: 1;
-			offset-distance: 39%;
-			transition: offset-distance var(--t-med) cubic-bezier(0.215, 0.61, 0.355, 1) var(--t-delay-motionpath);
-		}
-	}
+  .day-night-transition--dark .transition-scene .moonlight {
+    opacity: 1;
+    offset-distance: 39%;
+    transition: offset-distance var(--t-med) cubic-bezier(0.215, 0.61, 0.355, 1)
+      var(--t-delay-motionpath);
+  }
 }
 
 /* Let's have cool color transitions for people who do not want motion instead :) */
-
 @media (prefers-reduced-motion: reduce) {
-	.sun {
-		opacity: 1;
-	}
+  .sun {
+    opacity: 1;
+  }
 
-	.cloud {
-		opacity: 0.7;
-	}
+  .cloud {
+    opacity: 0.7;
+  }
 
-	.sun,
-	.cloud {
-		transition: opacity var(--t-slow) linear var(--t-delay-motionpath);
-	}
+  .sun,
+  .cloud {
+    transition: opacity var(--t-slow) linear var(--t-delay-motionpath);
+  }
 
-	.moonlight {
-		transform: translate(-3%, -62%);
-		transition: opacity var(--t-fast) linear;
-	}
+  .moonlight {
+    transform: translate(-3%, -62%);
+    transition: opacity var(--t-fast) linear;
+  }
 
-	.day-night-transition--dark .transition-scene {
-		.sun,
-		.cloud {
-			opacity: 0;
-		}
+  .day-night-transition--dark .transition-scene .sun,
+  .day-night-transition--dark .transition-scene .cloud {
+    opacity: 0;
+    transition: opacity var(--t-fast) linear;
+  }
 
-		.sun,
-		.cloud {
-			transition: opacity var(--t-fast) linear;
-		}
-
-		.moonlight {
-			opacity: 1;
-			transition: opacity var(--t-slow) linear var(--t-delay-motionpath);
-		}
-	}
+  .day-night-transition--dark .transition-scene .moonlight {
+    opacity: 1;
+    transition: opacity var(--t-slow) linear var(--t-delay-motionpath);
+  }
 }
-
-
-
-
-
-
-/* svg.animation-scene,
-svg.transition-scene {
-	margin: 3em auto;
-	z-index: 1;
-}
-
-svg.transition-scene {
-	display: block;
-}
- */

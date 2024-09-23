@@ -1,6 +1,6 @@
-import Link from 'next/link'
+import Link from "next/link";
 
-import { ContainerInner, ContainerOuter } from '@components/Container'
+import { ContainerInner, ContainerOuter } from "@components/Container";
 
 function NavLink({ href, children }) {
   return (
@@ -10,7 +10,7 @@ function NavLink({ href, children }) {
     >
       {children}
     </Link>
-  )
+  );
 }
 
 export default function Footer() {
@@ -21,7 +21,9 @@ export default function Footer() {
           <ContainerInner>
             <div className="flex flex-col items-center justify-between gap-6 sm:flex-row">
               <div className="flex flex-wrap justify-center gap-x-6 gap-y-1 text-sm font-medium text-zinc-800 dark:text-zinc-200">
-                <NavLink href="/">Home</NavLink>
+                <NavLink href="/">About me</NavLink>
+                <NavLink href="/blog">Blog</NavLink>
+
                 {/* <NavLink href="/projects">Projects</NavLink>
                 <NavLink href="/speaking">Speaking</NavLink>
                 <NavLink href="/uses">Uses</NavLink> */}
@@ -35,5 +37,5 @@ export default function Footer() {
         </div>
       </ContainerOuter>
     </footer>
-  )
+  );
 }

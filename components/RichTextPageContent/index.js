@@ -199,7 +199,7 @@ export default function RichTextPageContent(props) {
     <div className={RichTextPageContentStyles.page__content}>
       {documentToReactComponents(
         richTextBodyField.json,
-        getRichTextRenderOptions(richTextBodyField.links, { renderH2Links }),
+        // getRichTextRenderOptions(richTextBodyField.links, { renderH2Links }),
       )}
     </div>
   );

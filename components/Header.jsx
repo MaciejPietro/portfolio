@@ -124,8 +124,8 @@ function MobileNavigation(props) {
             </div>
             <nav className="mt-6">
               <ul className="-my-2 divide-y divide-zinc-100 text-base text-zinc-800 dark:divide-zinc-100/5 dark:text-zinc-300">
-                <MobileNavItem href="/">Home</MobileNavItem>
-                <MobileNavItem href="/about">About</MobileNavItem>
+                <MobileNavItem href="/">Blog</MobileNavItem>
+                <MobileNavItem href="/about">About me</MobileNavItem>
 
                 {/* <MobileNavItem href="/">Articles</MobileNavItem> */}
                 {/*  <MobileNavItem href="/projects">Projects</MobileNavItem>
@@ -167,8 +167,8 @@ function DesktopNavigation(props) {
   return (
     <nav {...props}>
       <ul className="flex rounded-full bg-white/90 px-3 text-sm font-medium text-zinc-800 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:text-zinc-200 dark:ring-white/10">
-        <NavItem href="/">Home</NavItem>
-        <NavItem href="/about">About</NavItem>
+        <NavItem href="/">About</NavItem>
+        <NavItem href="/blog">Blog</NavItem>
 
         {/* <NavItem href="/">Articles</NavItem> */}
         {/* <NavItem href="/projects">Projects</NavItem>
@@ -207,36 +207,51 @@ function clamp(number, a, b) {
   return Math.min(Math.max(number, min), max);
 }
 
-function AvatarContainer({ className, ...props }) {
+function GitHubLink() {
   return (
-    <div
-      className={clsx(
-        className,
-        "h-10 w-10 rounded-full bg-white/90 p-0.5 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:ring-white/10",
-      )}
-      {...props}
-    />
+    <Link
+      href="https://github.com/MaciejPietro"
+      aria-label="Home"
+      target="_blank"
+      className="cursor-pointer h-10 w-10 flex items-center justify-center rounded-full opacity-75 hover:opacity-100 transition-opacity bg-white/90 p-0.5 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:ring-white/10"
+    >
+      <svg
+        width="32"
+        height="32"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+        className="text-black dark:text-white transition-colors"
+      >
+        <path
+          fill="currentColor"
+          d="M12 2.247a10 10 0 0 0-3.162 19.487c.5.088.687-.212.687-.475 0-.237-.012-1.025-.012-1.862-2.513.462-3.163-.613-3.363-1.175a3.64 3.64 0 0 0-1.025-1.413c-.35-.187-.85-.65-.013-.662a2 2 0 0 1 1.538 1.025 2.137 2.137 0 0 0 2.912.825 2.1 2.1 0 0 1 .638-1.338c-2.225-.25-4.55-1.112-4.55-4.937a3.9 3.9 0 0 1 1.025-2.688 3.6 3.6 0 0 1 .1-2.65s.837-.262 2.75 1.025a9.43 9.43 0 0 1 5 0c1.912-1.3 2.75-1.025 2.75-1.025a3.6 3.6 0 0 1 .1 2.65 3.87 3.87 0 0 1 1.025 2.688c0 3.837-2.338 4.687-4.562 4.937a2.37 2.37 0 0 1 .674 1.85c0 1.338-.012 2.413-.012 2.75 0 .263.187.575.687.475A10.005 10.005 0 0 0 12 2.247"
+        />
+      </svg>
+    </Link>
   );
 }
 
-function Avatar({ large = false, className, ...props }) {
+function LinkedInLink() {
   return (
     <Link
-      href="/"
+      href="https://www.linkedin.com/in/maciej-pietrolaj/"
       aria-label="Home"
-      className={clsx(className, "pointer-events-auto")}
-      {...props}
+      target="_blank"
+      className="cursor-pointer h-10 w-10 flex items-center justify-center rounded-full opacity-75 hover:opacity-100 transition-opacity bg-white/90 p-0.5 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:ring-white/10"
     >
-      <Image
-        src={avatarImage}
-        alt=""
-        sizes={large ? "4rem" : "2.25rem"}
-        className={clsx(
-          "rounded-full bg-zinc-100 object-cover dark:bg-zinc-800",
-          large ? "h-16 w-16" : "h-9 w-9",
-        )}
-        priority
-      />
+      <svg
+        width="24"
+        height="24"
+        viewBox="-2 -2 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+        preserveAspectRatio="xMinYMin"
+        className="text-black dark:text-white transition-colors"
+      >
+        <path
+          fill="currentColor"
+          d="M19.959 11.719v7.379h-4.278v-6.885c0-1.73-.619-2.91-2.167-2.91-1.182 0-1.886.796-2.195 1.565-.113.275-.142.658-.142 1.043v7.187h-4.28s.058-11.66 0-12.869h4.28v1.824l-.028.042h.028v-.042c.568-.875 1.583-2.126 3.856-2.126 2.815 0 4.926 1.84 4.926 5.792M2.421.026C.958.026 0 .986 0 2.249c0 1.235.93 2.224 2.365 2.224h.028c1.493 0 2.42-.989 2.42-2.224C4.787.986 3.887.026 2.422.026zM.254 19.098h4.278V6.229H.254z"
+        />
+      </svg>
     </Link>
   );
 }
@@ -351,48 +366,12 @@ export default function Header() {
   return (
     <>
       <header
-        className="pointer-events-none relative z-50 flex flex-none flex-col"
+        className=" relative z-50 flex flex-none flex-col"
         style={{
           height: "var(--header-height)",
           marginBottom: "var(--header-mb)",
         }}
       >
-        {isHomePage && (
-          <>
-            <div
-              ref={avatarRef}
-              className="order-last mt-[calc(theme(spacing.16)-theme(spacing.3))]"
-            />
-            <Container
-              className="top-0 order-last -mb-3 pt-3"
-              style={{
-                position: "var(--header-position)",
-              }}
-            >
-              <div
-                className="top-[var(--avatar-top,theme(spacing.3))] w-full"
-                style={{
-                  position: "var(--header-inner-position)",
-                }}
-              >
-                <div className="relative">
-                  <AvatarContainer
-                    className="absolute left-0 top-3 origin-left transition-opacity"
-                    style={{
-                      opacity: "var(--avatar-border-opacity, 0)",
-                      transform: "var(--avatar-border-transform)",
-                    }}
-                  />
-                  <Avatar
-                    large
-                    className="block h-16 w-16 origin-left"
-                    style={{ transform: "var(--avatar-image-transform)" }}
-                  />
-                </div>
-              </div>
-            </Container>
-          </>
-        )}
         <div
           ref={headerRef}
           className="top-0 z-10 h-16 pt-6"
@@ -407,12 +386,10 @@ export default function Header() {
             }}
           >
             <div className="relative flex gap-4">
-              <div className="flex flex-1">
-                {!isHomePage && (
-                  <AvatarContainer>
-                    <Avatar />
-                  </AvatarContainer>
-                )}
+              <div className="flex flex-1 gap-4">
+                <GitHubLink />
+
+                <LinkedInLink />
               </div>
               <div className="flex flex-1 justify-end md:justify-center">
                 <MobileNavigation className="pointer-events-auto md:hidden" />
